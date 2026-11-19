@@ -50,5 +50,8 @@ async def submit(entry: Attempt, authorization: str = Header(default="")):
     await forward("POST","/rest/v1/scamshield_attempts",authorization,{"lesson":entry.id,"decision":entry.decision,"time_ms":entry.time})
     return {"success":True}
 
+from .arena import router as arena_router
+app.include_router(arena_router)
+
 if (ROOT.parent / "out").is_dir():
     app.mount("/",StaticFiles(directory=ROOT.parent / "out",html=True),name="site")

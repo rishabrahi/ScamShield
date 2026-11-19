@@ -1,5 +1,5 @@
-import {useLanguage} from './I18n'
-import {Entry,demo,correct} from '@/lib/data'
-const learners=['Riya S.','Jordan M.'].map((name,i)=>({name,rows:demo.filter((_,n)=>n%2===i)}))
-const accuracy=(r:Entry[])=>Math.round(100*r.filter(correct).length/r.length)
-export default function Admin(){const {t,lang:uiLang}=useLanguage();return <><p className="eyebrow">{t('Administration · sample data')}</p><h1>{t('Team awareness')}</h1><p>{t('Illustrative cohort analytics for the training workspace.')}</p><div className="stats">{[['Learners',2],['Training attempts',demo.length],['Average accuracy',accuracy(demo)+'%'],['High risk',learners.filter(x=>accuracy(x.rows)<70).length]].map(([l,v])=><article key={t(String(l))}><label>{t(String(l))}</label><strong>{v}</strong></article>)}</div><section className="panel journey"><div><h3>{t('Learner performance')}</h3>{learners.map(x=><div className="result" key={x.name}><b>{x.name}</b><span>{x.rows.length} {t("attempts")} · {accuracy(x.rows)}%</span></div>)}</div><div><h3>{t('Scenario coverage')}</h3>{learners.map(x=><label key={x.name}>{x.name} · {new Set(x.rows.map(r=>r.id)).size}/4<progress max={4} value={new Set(x.rows.map(r=>r.id)).size}/></label>)}</div></section></>}
+'use client'
+import Link from 'next/link'
+export default function Admin(){
+ return <section className="panel"><p className="eyebrow">Assessment administration</p><h1>Lab management</h1><p>Design labs, assign training, review submissions and compare learner progress.</p><Link href="/simulations/?view=studio">Open lab studio →</Link></section>
+}
