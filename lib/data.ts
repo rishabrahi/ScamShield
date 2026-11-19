@@ -1,0 +1,9 @@
+export const lessons=[
+ {title:"The unexpected invoice",sender:"Accounts Desk",address:"billing@example.invalid",type:"Email",level:"Intermediate",body:"An invoice you don’t recognize arrives from a new supplier. The sender asks you to approve payment before the end of the day.",hint:"Verify the supplier using your existing finance directory. An unfamiliar payment request paired with a deadline calls for independent confirmation.",bad:true},
+ {title:"A calendar change",sender:"Learning Team",address:"learning@example.invalid",type:"Email",level:"Foundational",body:"Your scheduled workshop has moved to Room 204. The updated room is also listed on the internal learning calendar. No reply or action is required.",hint:"The change matches an independently accessible source and asks for no sensitive information.",bad:false},
+ {title:"A surprise delivery",sender:"Delivery Notice",address:"Unrecognized number",type:"SMS",level:"Intermediate",body:"A message about a parcel you weren’t expecting requests a small redelivery fee through a link.",hint:"An unexpected fee and an unverified sender are warning signs. Check the order through the retailer directly.",bad:true},
+ {title:"An internal reading list",sender:"Library Team",address:"library@example.invalid",type:"Message",level:"Foundational",body:"The books discussed in yesterday’s reading group are available at the library desk. You can check availability in the usual catalog.",hint:"The information fits prior context and can be independently checked without following a link.",bad:false}
+]
+export type Entry={id:number;decision:boolean;time:number}
+export const correct=(e:Entry)=>e.decision===lessons[e.id].bad
+export const demo:Entry[]=Array.from({length:12},(_,i)=>({id:i%4,decision:i===2||i===5?!lessons[i%4].bad:lessons[i%4].bad,time:Date.UTC(2026,10,1+i,9,30)}))
